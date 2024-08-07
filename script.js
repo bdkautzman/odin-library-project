@@ -1,9 +1,10 @@
-function Book(title, author, pages, read, plot) {
+const myLibrary = [];
+
+function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.plot = plot;
     this.info = function() {
         let readString;
         this.read ? readString = "already read" : readString = "not read yet"; 
@@ -11,5 +12,12 @@ function Book(title, author, pages, read, plot) {
     }
 }
 
-const book = new Book("A Song of Fire and Ice", "George R. R. Martin", 1375, false,);
-console.log(book.info());
+function addBookToLibrary(title, author, pages, read) {
+    newBook = new Book(title, author, pages, read);
+
+    myLibrary.push(newBook);
+
+    for(book in myLibrary){
+        
+    }
+}
