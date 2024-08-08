@@ -12,6 +12,15 @@ function Book(title, author, pages, read) {
         this.read ? readString = "already read" : readString = "not read yet"; 
         return (this.title + "by" + this.author +", " + this.pages + "pages, " + readString)
     }
+
+    this.changeRead = function() {
+        if (this.read === true) {
+            this.read = false;
+        }else {
+            this.read = true;
+        }
+        refreshLibrary();
+    }
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -53,12 +62,21 @@ function genBookCard(book, index) {
     card.appendChild(pages);
 
     const read = document.createElement("div");
-    if (book.read) {
+    if (book.read === true) {
         read.textContent = "Read";
     }else {
         read.textContent = "Not read";
     }
     card.appendChild(read);
+
+    const readBtn = document.createElement("button");
+    readBtn.textContent = "Read Status";
+    readBtn.className = "readBtn"
+    readBtn.addEventListener("click", () => {
+            console.log("Change read")
+            book.changeRead();
+        })
+    card.appendChild(readBtn);
 
     const removeBtn = document.createElement("button");
     removeBtn.textContent = "Remove";
@@ -66,6 +84,7 @@ function genBookCard(book, index) {
     removeBtn.addEventListener("click", (e)=> {
         const remBook =document.querySelector("#book" + index);
         remBook.remove();
+        console.log(index)
         myLibrary.splice(index, 1);
     })
     card.appendChild(removeBtn);

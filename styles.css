@@ -67,7 +67,8 @@ table {
     margin: auto;
 }
 
-.removeBtn {
+.removeBtn,
+.readBtn {
     width: 100px;
     margin: 20px auto 5px auto;
 }
