@@ -21,16 +21,15 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 function refreshLibrary() {
-    const cards = libraryVis.childNodes;
-
-    for(const node of cards){
-        node.remove();
+    let node = libraryVis.lastElementChild;
+    while(node) {
+        libraryVis.removeChild(node);
+        node = libraryVis.lastElementChild;
     }
 
     for(const book of myLibrary){
-        newCard = genBookCard(book);
+        const newCard = genBookCard(book);
         libraryVis.appendChild(newCard);
-        console.log(book);
     }
 }
 
@@ -59,6 +58,24 @@ function genBookCard(book) {
     card.appendChild(read);
     
     return card;
+}
+
+const submitBtn = document.querySelector(".submit");
+submitBtn.addEventListener("click", submitForm);
+
+function submitForm(event) {
+    const title = document.querySelector("#title");
+    const author = document.querySelector("#author");
+    const pages = document.querySelector("#pages");
+    const read = document.querySelector("#read");
+
+    addBookToLibrary(title.value, author.value, pages.value, read.value);
+
+    title.value = "";
+    author.value = "";
+    pages.value = "";
+
+    event.preventDefault();
 }
 
 addBookToLibrary("A Song of Fire and Ice", "George R R Martin", 1653, true);
