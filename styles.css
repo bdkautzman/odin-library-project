@@ -66,3 +66,8 @@ table {
 .book > div {
     margin: auto;
 }
+
+.removeBtn {
+    width: 100px;
+    margin: 20px auto 5px auto;
+}

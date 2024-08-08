@@ -27,14 +27,17 @@ function refreshLibrary() {
         node = libraryVis.lastElementChild;
     }
 
+    let index = 0;
     for(const book of myLibrary){
-        const newCard = genBookCard(book);
+        const newCard = genBookCard(book, index);
         libraryVis.appendChild(newCard);
+        index++;
     }
 }
 
-function genBookCard(book) {
+function genBookCard(book, index) {
     const card = document.createElement("div");
+    card.id = "book" + index;
     card.className = "book";
 
     const title = document.createElement("div");
@@ -56,6 +59,16 @@ function genBookCard(book) {
         read.textContent = "Not read";
     }
     card.appendChild(read);
+
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "Remove";
+    removeBtn.className = "removeBtn"
+    removeBtn.addEventListener("click", (e)=> {
+        const remBook =document.querySelector("#book" + index);
+        remBook.remove();
+        myLibrary.splice(index, 1);
+    })
+    card.appendChild(removeBtn);
     
     return card;
 }
